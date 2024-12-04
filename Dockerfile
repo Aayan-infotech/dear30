@@ -13,23 +13,23 @@ RUN npm install --production
 # Copy the rest of the application files
 COPY . .
 
-# Build the project (assuming build command creates the 'build' folder)
+# Build the project (assuming the build command creates the 'build' folder)
 RUN npm run build
 
-# Stage 2: Production Stage
-FROM node:18-alpine
+# Stage 2: Nginx Production Stage
+FROM nginx:stable-alpine
 
-# Install 'serve' globally to serve static files
-RUN npm install -g serve
+# Copy the built files from the build stage
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Set the working directory
-WORKDIR /app
+# Remove default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy only the 'build' folder from the build stage
-COPY --from=build /app/build ./build
+# Add your custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/
 
-# Expose port 80 to allow external access
+# Expose port 80 for the server
 EXPOSE 80
 
-# Serve the application on port 80
-CMD ["serve", "-s", "build", "-l", "80"]
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
