@@ -11,27 +11,27 @@ function Checkout() {
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '75vh', backgroundColor: '#000', py: {xs: 5, md: 0} }}>
       <Container maxWidth={false} className="container center-content" sx={{flexDirection: 'column'}}>
         <Box maxWidth="md" sx={{display: {xs: 'column', md:'flex'}, backgroundColor: '#5FEF45', borderRadius: 4, p: 3 }}>
-          <RadioGroup defaultValue="creditCard" name="payment-method">
+          <RadioGroup defaultValue="creditCard" name="payment-method" sx={{fontFamily: '"Poppins", sans-serif'}}>
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 1}}>
-              <FormControlLabel value="creditCard" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}>
+              <FormControlLabel value="creditCard" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', fontFamily: '"Poppins", sans-serif' }}>
                 <CreditCardIcon sx={{ mr: 1, color: '#0068B3' }} /> Credit Card
               </Typography>}/>
             </Box>
           
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3}}>
-              <FormControlLabel value="paypal" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}>
+              <FormControlLabel value="paypal" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', fontFamily: '"Poppins", sans-serif' }}>
                 <Box component="img" src={paypal} alt="paypal-icon" sx={{ height: 25, width: 25, marginRight: 1 }} /> PayPal 
               </Typography>}/>
             </Box>
 
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 2}}>
-              <FormControlLabel value="applePay" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}>
+              <FormControlLabel value="applePay" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', fontFamily: '"Poppins", sans-serif' }}>
                 <Apple sx={{ mr: 1 }} /> ApplePay
               </Typography>}/>
             </Box>
 
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3, mb: {xs: 2, md:0}}}>
-              <FormControlLabel value="gpay" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}>
+              <FormControlLabel value="gpay" control={<Radio />} label={<Typography variant='h6' fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', fontFamily: '"Poppins", sans-serif' }}>
               <Box component="img" src={gpay} alt="paypal-icon" sx={{ height: 25, width: 25, marginRight: 1 }} /> Gpay
               </Typography>}/>
             </Box>
@@ -45,7 +45,7 @@ function Checkout() {
               <TextField variant="filled" placeholder="Month" sx={{ backgroundColor: '#e0ffe6', borderRadius: 1, flex: 1 }} />
               <TextField variant="filled" placeholder="Year" sx={{ backgroundColor: '#e0ffe6', borderRadius: 1, flex: 1 }} />
             </Box>
-            <TextField variant="filled" placeholder="CVC" sx={{ backgroundColor: '#e0ffe6', borderRadius: 1, fontSize: '1.5rem' }} helperText="3 or 4 digits usually found on the signature strip" />
+            <TextField variant="filled" placeholder="CVC" sx={{ backgroundColor: '#e0ffe6', borderRadius: 1, fontSize: '1.5rem', fontFamily: '"Poppins", sans-serif'}} helperText="3 or 4 digits usually found on the signature strip" />
           </Box>
         </Box>
         

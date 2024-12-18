@@ -8,6 +8,12 @@ import "./navigationUser.css";
 import { Link } from 'react-router-dom';
 
 function NavigationUser() {
+
+  const UserType = (user) => {
+    console.log("Hello "+user);
+    sessionStorage.setItem("User", user);
+  }
+
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh" bgcolor="black" color="white" p={2}>
       <Box position="absolute" top={16} left={16}>
@@ -21,14 +27,14 @@ function NavigationUser() {
         <Box textAlign="center" display="flex" flexDirection="column">
           <img src={User} alt="User Icon" width="100" style={{margin: '0 auto'}}/>
           <Link to="/login">
-            <Button variant="contained" sx={{ mt: 2, bgcolor: 'white', color: 'black', fontWeight: 'bolder', textTransform: 'none', borderRadius: '16px', px: 3, py: 1, width: '300px', fontSize: '2rem'}}>As User</Button>
+            <Button variant="contained" onClick={() => UserType("Customer")} sx={{ mt: 2, bgcolor: 'white', color: 'black', fontWeight: 'bolder', textTransform: 'none', borderRadius: '16px', px: 3, py: 1, width: '300px', fontSize: '2rem'}}>As User</Button>
           </Link>
         </Box>
 
         <Box textAlign="center" display="flex" flexDirection="column">
           <img src={Dealer} alt="Dealer Icon" width="100" style={{margin: '0 auto'}}/>
           <Link to="/login">
-            <Button variant="contained" sx={{ mt: 2, bgcolor: 'white', color: 'black', fontWeight: 'bolder', textTransform: 'none', borderRadius: '16px', px: 3, py: 1, width: '300px',fontSize:'2rem',}}>As Dealer</Button>
+            <Button variant="contained" onClick={() => UserType("Vendor")} sx={{ mt: 2, bgcolor: 'white', color: 'black', fontWeight: 'bolder', textTransform: 'none', borderRadius: '16px', px: 3, py: 1, width: '300px',fontSize:'2rem',}}>As Dealer</Button>
           </Link>
         </Box>
       </Box>

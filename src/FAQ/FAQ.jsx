@@ -50,7 +50,7 @@ function FAQ() {
       {/* Profile Title */}
       <Box sx={{py: 4}}>
         <Container maxWidth={false} className="container" sx={{display: {sm: 'block',md:'flex'}, flexDirection: {sm: 'column', md: 'row'}, justifyContent: 'space-between'}}>
-          <Typography variant="h3" sx={{ color: '#fff', mb: 3 }}>Frequently Asked Question</Typography>
+          <Typography variant="h3" sx={{ color: '#fff', mb: 3, fontSize: {xs: '2.5rem'} }}>Frequently Asked Question</Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', border: '2px solid #00FF00', borderRadius: '10px', padding: '0px 10px', backgroundColor: '#000', width: '100%', maxWidth: '450px', height: '55px', color: '#fff'}}>
             <InputBase placeholder="Search any products" sx={{ flex: 1, paddingLeft: '8px', fontSize: '1.2rem', color: '#fff'}}/>
             <IconButton type="submit" sx={{ padding: '10px', color: '#FFFFFF' }}>
@@ -80,8 +80,8 @@ function FAQ() {
 
       <Box sx={{background: 'linear-gradient(90deg, #5FEF45 0%, #51B175 100%)', py: 5, mt: 8}}> 
         <Container maxWidth={false} className='container center-content' sx={{flexDirection: 'column'}}>
-          <Typography variant='h3' sx={{color: '#fff', fontWeight: 'bold', textAlign: 'center'}}>Ready to get started?</Typography>
-          <Typography variant='h4' sx={{my: 2, textAlign: 'center'}}>Talk to us today</Typography>
+          <Typography variant='h3' sx={{color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: {xs: '2.5rem'}, fontFamily: '"Poppins", sans-serif'}}>Ready to get started?</Typography>
+          <Typography variant='h4' sx={{my: 2, textAlign: 'center', fontFamily: '"Poppins", sans-serif'}}>Talk to us today</Typography>
           <Box sx={{display: {xs: 'block', md: 'flex'}, flexDirection: {xs: 'column', md: 'row'}, textAlign: 'center'}}>
             <Link to="/contactus"><Button variant='contained' sx={{ flex: 1, mr: {md: 2}, textTransform: 'initial', fontSize: '1.3rem', fontWeight: 'bold', px: {md: 16}, color: '#57CA61', backgroundColor: '#fff', mb: {xs: 2}, width: {xs: '100%'}}}>Contact Us</Button></Link>
             <Link to="/enquiryform"><Button variant='outlined' color='success' sx={{ flex: 1, ml: {md: 2}, textTransform: 'initial', fontSize: '1.3rem', fontWeight: 'bold', px: {md: 10}, color: '#fff', border: '2px solid #fff',  width: {xs: '100%'}}}>Submit Inquiry</Button></Link>

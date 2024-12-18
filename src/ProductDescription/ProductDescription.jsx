@@ -121,9 +121,9 @@ function ProductDescription() {
             <Box component="img" src={prodDescription.img} alt={prodDescription.title} sx={{ height: "600px", width: "100%", objectFit: "contain", borderRadius: "10px" }}/>
 
             <Box sx={{mr: 4}}>
-              <Typography variant="h3" sx={{ fontWeight: 'bold', mt: 4, fontFamily: '"Poppins", sans-serif'  }}>{prodDescription.title}</Typography>
+              <Typography variant="h3" sx={{ fontWeight: 'bold', mt: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'}}}>{prodDescription.title}</Typography>
               <Box sx={{display: {xs: 'column',md:'flex'}, justifyContent: 'space-between'}}>
-                <Typography variant="h3" sx={{ color: "#4CAF50", my: 4, fontWeight: 'bold', mb: {xs: 2, md: 4}, fontFamily: '"Poppins", sans-serif'  }}>{prodDescription.price}</Typography>
+                <Typography variant="h3" sx={{ color: "#4CAF50", my: 4, fontWeight: 'bold', mb: {xs: 2, md: 4}, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'} }}>{prodDescription.price}</Typography>
 
                 <Box sx={{display: 'flex', mt: 2 }}>
                   <Typography variant='h6' sx={{mr:2, mt: 4, fontFamily: '"Poppins", sans-serif' }}>Quantity</Typography>
@@ -148,8 +148,8 @@ function ProductDescription() {
           </Box>
 
           <Box sx={{mt: 5}}>
-            <Typography variant="h3" sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', mb: 2 }}>
-              <GpsFixedIcon sx={{ fontSize: '2.5rem', mr: 1, fontFamily: '"Poppins", sans-serif' }} /> Description
+            <Typography variant="h3" sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', mb: 2, fontSize: {xs: '2.5rem'}   }}>
+              <GpsFixedIcon sx={{ fontSize: {xs: '2.2rem', md: '2.5rem'}, mr: 1, fontFamily: '"Poppins", sans-serif', }} /> Description
             </Typography>
             <Typography variant="body1" sx={{ color: "#fff", mb: 3, fontFamily: '"Poppins", sans-serif'  }}>{prodDescription.description}</Typography>
 
@@ -166,8 +166,8 @@ function ProductDescription() {
       <Box className="customer-Sec section" sx={{backgroundColor: "#000"}}>
         <Container maxWidth={false} className='container'>
           <Box>
-            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif'  }}>
-                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: '2.5rem'}}/></span> Customers Reviews
+            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'} }}>
+                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: {xs: '2.2rem', md: '2.5rem'}}}/></span> Customers Reviews
             </Typography>
 
             <Slider {...settings} className="customer-reviews-slider">
@@ -199,8 +199,8 @@ function ProductDescription() {
       <Box className="products-sec section" sx={{backgroundColor: "#000"}}>
         <Container maxWidth={false} className='container'>
           <Box>
-            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4,  fontFamily: '"Poppins", sans-serif'  }}>
-                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: '2.5rem'}}/></span> Our Latest Products
+            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4,  fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'}  }}>
+                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: {xs: '2.2rem', md: '2.5rem'}}}/></span> Our Latest Products
             </Typography>
 
             <Slider {...settings}>
@@ -233,7 +233,7 @@ function ProductDescription() {
 const NextArrow = (props) => {
   const { onClick } = props;
   return (
-    <Box onClick={onClick} sx={{ position: "absolute", top: "50%", right: "23px"}} className="arrows">
+    <Box onClick={onClick} sx={{ position: "absolute",  top: {xs: "42%", md: "50%"}, right: "23px"}} className="arrows">
       <KeyboardArrowRightOutlinedIcon sx={{fontSize: "3rem"}}/>
     </Box>
   );
@@ -243,7 +243,7 @@ const NextArrow = (props) => {
 const PrevArrow = (props) => {
   const { onClick } = props;
   return (
-    <Box onClick={onClick} sx={{ position: "absolute", top: "50%", left: "23px",}} className="arrows">
+    <Box onClick={onClick} sx={{ position: "absolute",  top: {xs: "42%", md: "50%"}, left: "23px",}} className="arrows">
       <KeyboardArrowRightOutlinedIcon sx={{ transform: "rotate(180deg)", fontSize: "3rem" }} />
     </Box>
   );

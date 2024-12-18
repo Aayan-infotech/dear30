@@ -107,6 +107,8 @@ function Home() {
       }
     ]
   };
+  const user = sessionStorage.getItem("User");
+  const token = sessionStorage.getItem("Token");
       
   return (
     <Box>
@@ -116,21 +118,28 @@ function Home() {
           <Typography variant="h2" gutterBottom sx={{fontSize: {xs: '2.8rem', md: '4rem'}, fontWeight: 'bold', paddingTop: {xs: '100px'}, fontFamily: '"Poppins", sans-serif'}}>
             Explore, Book, Conquer
           </Typography>
-          <Typography variant="h5" gutterBottom sx={{fontFamily: '"Poppins", sans-serif'}}>
+          <Typography variant="h5" gutterBottom sx={{fontFamily: '"Poppins", sans-serif', fontSize: {xs: '1.3rem', md: '1.5rem'}}}>
             Discover premium <span style={{fontWeight: 'bolder'}}>hunting resources</span> and <span style={{fontWeight: 'bolder'}}>top-notch gear</span> effortlessly.
             Your next adventure is just a few clicks away!
           </Typography>
           <Link to="/products">
-            <Button variant="contained"  sx={{ margin: '20px 20px 0 0', color: '#000', backgroundColor: '#fff', padding: '8px 40px', fontSize: '1.6rem', fontWeight: 'bold', borderRadius: '10px', textTransform: 'initial' }}>
+            <Button variant="contained"  sx={{ margin: '20px 20px 0 0', color: '#000', backgroundColor: '#fff', padding: {xs: '5px 35px', md:'8px 40px'}, fontSize: {xs: '1.4rem', md:'1.6rem'}, fontWeight: 'bold', borderRadius: '10px', textTransform: 'initial' }}>
               Book Now!
             </Button>
           </Link>
-          
-          <Link to="/enquiryform">
-            <Button variant="outlined" color="secondary" sx={{ margin: '20px 20px 0 0', color: '#fff', backgroundColor: 'none', border: 'none', fontSize: '1.6rem',  fontWeight: 'bold', textTransform: 'initial'}}>
-              Dealers Inquiry <KeyboardArrowRightOutlinedIcon sx={{fontSize: '2.5rem'}}/>
+          {(user == "Vendor" && token) ? (
+          <Link to="/personalinfo">
+            <Button variant="outlined" color="secondary" sx={{ margin: '20px 20px 0 0', color: '#fff', backgroundColor: 'none', border: 'none', fontSize: {xs: '1.4rem', md:'1.6rem'},  fontWeight: 'bold', textTransform: 'initial'}}>
+              Go To Dashboard <KeyboardArrowRightOutlinedIcon sx={{fontSize: {xs: '2.2rem', md: '2.5rem'}}}/>
             </Button>
           </Link>
+          ) : (
+          <Link to="/enquiryform">
+            <Button variant="outlined" color="secondary" sx={{ margin: '20px 20px 0 0', color: '#fff', backgroundColor: 'none', border: 'none', fontSize: {xs: '1.4rem', md:'1.6rem'},  fontWeight: 'bold', textTransform: 'initial'}}>
+              Dealers Inquiry <KeyboardArrowRightOutlinedIcon sx={{fontSize: {xs: '2.2rem', md: '2.5rem'}}}/>
+            </Button>
+          </Link>
+          )}
           <Box>
 
           </Box>
@@ -156,8 +165,8 @@ function Home() {
      <Box className="products-sec section" sx={{backgroundColor: "#000"}}>
         <Container maxWidth={false} className='container'>
           <Box>
-            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif' }}>
-                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: '2.5rem'}}/></span> Our Latest Products
+            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem', md: '3rem'}}}>
+                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: {xs: '2.2rem', md: '2.5rem'}}}/></span> Our Latest Products
             </Typography>
 
             <Slider {...settings}>
@@ -187,8 +196,8 @@ function Home() {
      <Box className="customer-Sec section" sx={{backgroundColor: "#000"}}>
         <Container maxWidth={false} className='container'>
           <Box>
-            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif' }}>
-                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: '2.5rem'}}/></span> Customers Reviews
+            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem', md: '3rem'} }}>
+                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: {xs: '2.2rem', md: '2.5rem'}}}/></span> Customers Reviews
             </Typography>
 
             <Slider {...settings} className="customer-reviews-slider">
@@ -221,8 +230,8 @@ function Home() {
      <Box className="blog-sec section" sx={{backgroundColor: "#000"}}>
         <Container maxWidth={false} className='container'>
           <Box>
-            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif'}}>
-                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: '2.5rem'}}/></span> Latest Blogs
+            <Typography variant="h3" sx={{ color: "white", fontWeight: "bold", mb: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem', md: '3rem'} }}>
+                <span style={{ marginRight: "10px" }}><GpsFixedIcon sx={{ fontSize: {xs: '2.2rem', md: '2.5rem'}}}/></span> Latest Blogs
             </Typography>
 
             <Slider {...settings}>
@@ -253,7 +262,7 @@ function Home() {
 const NextArrow = (props) => {
     const { onClick } = props;
     return (
-      <Box onClick={onClick} sx={{ position: "absolute", top: "50%", right: "23px"}} className="arrows">
+      <Box onClick={onClick} sx={{ position: "absolute", top: {xs: "42%", md: "50%"}, right: "23px"}} className="arrows">
         <KeyboardArrowRightOutlinedIcon sx={{fontSize: "3rem"}}/>
       </Box>
     );
@@ -263,7 +272,7 @@ const NextArrow = (props) => {
 const PrevArrow = (props) => {
     const { onClick } = props;
     return (
-      <Box onClick={onClick} sx={{ position: "absolute", top: "50%", left: "23px",}} className="arrows">
+      <Box onClick={onClick} sx={{ position: "absolute", top: {xs: "42%", md: "50%"}, left: "23px",}} className="arrows">
         <KeyboardArrowRightOutlinedIcon sx={{ transform: "rotate(180deg)", fontSize: "3rem" }} />
       </Box>
     );

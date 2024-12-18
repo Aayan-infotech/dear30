@@ -9,6 +9,12 @@ import img1 from "../../Images/home-4.png";
 import { Link } from "react-router-dom";
 
 function PersonalInfo() {
+
+  const handleLogout = () => {
+    // console.log("It is cliecked");
+    sessionStorage.removeItem("Token");
+  }
+
   return (
     <Box sx={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', py: 5 }}>
       <Container maxWidth="lg">
@@ -44,7 +50,6 @@ function PersonalInfo() {
                   </ListItem>
                 </Link>
 
-                
                 <Link to="/manageaddress" className='link-c'>
                   <ListItem button sx={{my: 1, '&:hover':{backgroundColor: '#5FEF45'}}}>
                     <ListItemIcon><RoomOutlinedIcon sx={{ color: '#000' }} /></ListItemIcon>
@@ -66,7 +71,7 @@ function PersonalInfo() {
                   </ListItem>
                 </Link>
 
-                <Link to="/login" className='link-c'>
+                <Link to="/navigationuser" className='link-c' onClick={handleLogout}>
                   <ListItem button sx={{my: 1, '&:hover':{backgroundColor: '#5FEF45'}}}>
                     <ListItemIcon><ExitToApp sx={{ color: '#000' }} /></ListItemIcon>
                     <ListItemText primary="Log Out" primaryTypographyProps={{ sx: { color: '#000', fontSize: '1.1rem' } }}/>

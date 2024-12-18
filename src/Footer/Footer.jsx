@@ -27,7 +27,7 @@ function Footer() {
           
           {/* Website Links */}
           <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h5" sx={{ color: '#5FEF45', mb: 2, fontWeight: 'bold' }}>Website Links</Typography>
+            <Typography variant="h5" sx={{ color: '#5FEF45', mb: 2, fontWeight: 'bold',fontFamily: '"Poppins", sans-serif' }}>Website Links</Typography>
             <Box>
               <Link href="/" color="inherit" underline="none" sx={{ display: 'block', mb: 1 }}>Home</Link>
               <Link href="/aboutus" color="inherit" underline="none" sx={{ display: 'block', mb: 1 }}>About</Link>
@@ -38,7 +38,7 @@ function Footer() {
           
           {/* Services */}
           <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h5" sx={{ color: '#5FEF45', mb: 2, fontWeight: 'bold' }}>Services</Typography>
+            <Typography variant="h5" sx={{ color: '#5FEF45', mb: 2, fontWeight: 'bold', fontFamily: '"Poppins", sans-serif' }}>Services</Typography>
             <Box>
               <Link href="#" color="inherit" underline="none" sx={{ display: 'block', mb: 1 }}>Website designing</Link>
               <Link href="#" color="inherit" underline="none" sx={{ display: 'block', mb: 1 }}>Website Development</Link>
@@ -73,7 +73,7 @@ function Footer() {
         
         {/* Footer Bottom Text */}
         <Box sx={{ borderTop: '1px solid #5FEF45', mt: 4, pt: 3, textAlign: 'center' }}>
-          <Typography variant="h6" sx={{color: '#fff', fontSize: '1.1rem'}}>
+          <Typography variant="h6" sx={{color: '#fff', fontSize: '1.1rem', fontFamily: '"Poppins", sans-serif'}}>
             Non Copyrighted © 2024 Design and upload by Aayan Infotech
           </Typography>
         </Box>
