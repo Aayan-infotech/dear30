@@ -1,10 +1,13 @@
-import React from 'react';
-import { Box, Container, Typography, Button, TextField, Grid, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import React,{useState} from 'react';
+import { Box, Container, Typography, Button, TextField, Grid, List, ListItem, ListItemIcon, ListItemText, Divider,InputAdornment,IconButton } from '@mui/material';
 import {CreditCard, ExitToApp} from '@mui/icons-material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import BorderAllOutlinedIcon from '@mui/icons-material/BorderAllOutlined';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { green } from "@mui/material/colors";
 import img1 from "../../Images/home-4.png";
 import { Link } from "react-router-dom";
 
@@ -14,6 +17,12 @@ function PersonalInfo() {
     // console.log("It is cliecked");
     sessionStorage.removeItem("Token");
   }
+  
+  const [confirmPassword, setConfirmPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => setConfirmPassword((prev) => !prev);
+  const handleToggleConfirmPasswordVisibility = () => setShowConfirmPassword((prev) => !prev);
 
   return (
     <Box sx={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', py: 5 }}>
@@ -83,59 +92,77 @@ function PersonalInfo() {
           
           {/* Personal Information Form */}
           <Grid item xs={12} sm={8} md={9}>
-            <Box>
+            <Box sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="First Name" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                  <TextField fullWidth variant="outlined" label="First Name" name="fullName" InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="Last Name" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                  {/* <TextField fullWidth label="Last Name" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} /> */}
+                  <TextField fullWidth variant="outlined" label="Last Name" name="fullName" InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="Email Address" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                  <TextField fullWidth variant="outlined" label="Email Address" name="fullName" InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+                  {/* <TextField fullWidth label="Email Address" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} /> */}
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="Mobile No." variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                  <TextField fullWidth variant="outlined" label="Mobile No." name="fullName" InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+                  {/* <TextField fullWidth label="Mobile No." variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} /> */}
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="Gender" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                  <TextField fullWidth variant="outlined" label="Gender" name="fullName" InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+                  {/* <TextField fullWidth label="Gender" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} /> */}
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField fullWidth label="DOB" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                  <TextField fullWidth variant="outlined" label="DOB" name="fullName" InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+                  {/* <TextField fullWidth label="DOB" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} /> */}
                 </Grid>
               </Grid>
 
               {/* Update Button */}
-              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+              {/* <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
                 <Button variant="contained" sx={{ backgroundColor: '#5FEF45', color: '#fff', px: 10, fontSize: '1.2rem', textTransform: 'initial', fontWeight: 'bold' }}>Update</Button>
+              </Box> */}
+              <Box sx={{  display: 'inline-block', justifyContent: 'center', mt: 3, p: '2px', borderRadius: 2}}>
+                <Button variant="contained" sx={{ background: 'linear-gradient(90deg, #599D21 0%, #179B7E 100%)', color: '#fff', fontWeight: 'bold', fontSize: '1.2rem', textTransform: 'none', borderRadius: 2, px: 8 }}>Update</Button>
               </Box>
-              {/* <Box sx={{ display: 'flex',justifyContent: 'center', mt: 3, background: 'linear-gradient(90deg, #78FF00 0%, #fff 100%)', px: 10}}>
-              <Button variant="contained" sx={{background: 'linear-gradient(90deg, #599D21 0%, #179B7E 100%)', color: '#fff', fontWeight: 'bold', fontSize: '1.2rem', textTransform: 'intial', px: 10}}>
-                Log In
-              </Button>
-            </Box> */}
 
               {/* Change Password Section */}
-              <Box sx={{ mt: 4 }}>
+              <Box sx={{ mt: 4}}>
                 <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                   <Typography variant="h4" sx={{ color: '#fff', mb: 1 }}>Change Password</Typography>
-                  <Typography variant="body6" sx={{ color: '#5FEF45', mb: 1 }}>Forgot Password?</Typography>
+                  <Typography variant="body6" sx={{ color: '#5FEF45', mb: 1, cursor: 'pointer' }}>Forgot Password?</Typography>
                 </Box>
                 <Typography variant="body3" color="textSecondary" sx={{color: '#fff', mb: 2 }}>
                   Type your new strong password. Your password must include:<br/> One capital letter & one small letter at least, one special character, and a minimum of 8 digits long.
                 </Typography>
                 <Grid container spacing={2} sx={{marginTop: '10px'}}>
                   <Grid item xs={12} sm={6}>
-                    <TextField fullWidth type="password" label="Password" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                    {/* <TextField fullWidth type="password" label="Password" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} /> */}
+                    <TextField fullWidth variant="outlined" type={confirmPassword ? "text" : "password"} label="Password" name="password"  InputProps={{ style: { color: "white" }, endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleTogglePasswordVisibility} edge="end" sx={{ color: "white" }}>
+                          {confirmPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),}}sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500],},"&:hover fieldset": {borderColor: green[500],},},"& .MuiInputLabel-root": {color: "white", fontFamily: "Poppins, sans-serif"},}}/>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField fullWidth type="password" label="Confirm Password" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} />
+                    {/* <TextField fullWidth type="password" label="Confirm Password" variant="outlined" InputProps={{ sx: { color: '#fff', border: '2px solid silver' } }} InputLabelProps={{ sx: { color: 'silver' } }} /> */}
+                    <TextField fullWidth variant="outlined" type={showConfirmPassword ? "text" : "password"} label="Confirm Password" name="password"  InputProps={{ style: { color: "white" }, endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleToggleConfirmPasswordVisibility} edge="end" sx={{ color: "white" }}>
+                          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),}}sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500],},"&:hover fieldset": {borderColor: green[500],},},"& .MuiInputLabel-root": {color: "white", fontFamily: "Poppins, sans-serif"},}}/>
+                 
                   </Grid>
                 </Grid>
 
                 {/* Reset Button */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }} >
-                  <Button variant="contained" sx={{ backgroundColor: '#5FEF45', color: '#fff', px: 10, fontSize: '1.2rem', textTransform: 'initial', fontWeight: 'bold' }}>Reset</Button>
+                <Box sx={{ display: 'flex', justifyContent: 'center',alignItems: 'center', mt: 3, p: '2px', borderRadius: 2}}>
+                  <Button variant="contained" sx={{ background: 'linear-gradient(90deg, #599D21 0%, #179B7E 100%)', color: '#fff', fontWeight: 'bold', fontSize: '1.2rem', textTransform: 'none', borderRadius: 2, px: 9 }}>Reset</Button>
                 </Box>
               </Box>
             </Box>

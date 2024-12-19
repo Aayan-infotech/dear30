@@ -8,16 +8,27 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Box, Container, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Link } from "react-router-dom";
+import { BorderBottom } from '@mui/icons-material';
 
 function Navbar() {
 
   const token = sessionStorage.getItem("Token");
   const[drawerOpen, setDrawerOpen] = useState(false);
+  const[activeLink, setActiveLink] = useState('/');
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   }
   const user = sessionStorage.getItem("User");
+
+  const handleLinkClick = (path) => {
+    setActiveLink(path);
+  }
+
+  const getLinkStyles = (path) => ({
+    fontWeight: activeLink === path ? 'bolder': 'normal',
+    borderBottom: activeLink === path ? '2px solid white' : 'none'
+  })
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{textAlign: 'center', mb: 8}}>
@@ -75,16 +86,14 @@ function Navbar() {
             <Toolbar className='head-tool'>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Link to="/">
-                  <Button sx={{ color: 'black', fontSize: '1.2rem', marginRight: 6, background: '#5FEF45', lineHeight: 1.2 }}>
-                    Logo
-                  </Button>
+                  <Button sx={{ color: 'black', fontSize: '1.2rem', marginRight: 6, background: '#5FEF45', lineHeight: 1.2 }}>Logo</Button>
                 </Link>
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                  <Link to="/"><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4 }}>Home</Button></Link>
-                  <Link to="/products"><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4 }}>Products</Button></Link>
-                  <Link to="/service"><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4 }}>Services</Button></Link>
-                  { user !== "Vendor" && (<Link to="/dealers"><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4 }}>Dealers</Button></Link> )}
-                  <Link to="/aboutus"><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4 }}>About Us</Button></Link>
+                  <Link to="/" onClick={() => handleLinkClick('/')}><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4, ...getLinkStyles('/') }}>Home</Button></Link>
+                  <Link to="/products" onClick={() => handleLinkClick('/products')}><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4, ...getLinkStyles('/products') }}>Products</Button></Link>
+                  <Link to="/service" onClick={() => handleLinkClick('/service')}><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4, ...getLinkStyles('/service') }}>Services</Button></Link>
+                  { user !== "Vendor" && (<Link to="/dealers" onClick={() => handleLinkClick('/dealers')}><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4, ...getLinkStyles('/dealers') }}>Dealers</Button></Link> )}
+                  <Link to="/aboutus" onClick={() => handleLinkClick('/aboutus')}><Button sx={{ color: 'white', fontSize: '1.2rem', marginRight: 4, ...getLinkStyles('/aboutus') }}>About Us</Button></Link>
                 </Box>
               </Box>
 
