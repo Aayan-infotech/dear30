@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dear30-front
 spec:
-  replicas: 6
+  replicas: 2
   selector:
     matchLabels:
       app: dear30-front
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dear30-front
-          image: amazingatul/dear30-front-nginx
+          image: amazingatul/dear30:v2
           ports:
             - containerPort: 80
 ---
@@ -31,4 +31,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: LoadBalancer
+  type: ClusterIP

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dear30-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx  # Specify the ingress class (if using NGINX Ingress)
+  rules:
+  - host: dearhunt.atulrajput.tech  # Frontend hostname
+    http:
+      paths:
+      - path: /  # Route traffic to frontend service
+        pathType: Prefix
+        backend:
+          service:
+            name: dear30-front-service
+            port:
+              number: 80
+      - path: /api  # Route traffic to backend service
+        pathType: Prefix
+        backend:
+          service:
+            name: dear30-backend-service
+            port:
+              number: 9876
