@@ -4,6 +4,7 @@ metadata:
   name: dear30-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-prod  # Cert-Manager ClusterIssuer for Let's Encrypt
 spec:
   ingressClassName: nginx  # Specify the ingress class (if using NGINX Ingress)
   rules:
@@ -24,3 +25,7 @@ spec:
             name: dear30-backend-service
             port:
               number: 9876
+  tls:
+  - hosts:
+    - dearhunt.atulrajput.tech  # Add the domain here for TLS
+    secretName: dear30-tls  # Secret where the TLS certificate will be stored
