@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Typography, Button, Box, Container, IconButton, Divider} from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import { Typography, Button, Box, Container, IconButton} from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import img1 from "../Images/productDesc-1.png"
 import AddIcon from "@mui/icons-material/Add";
@@ -12,9 +12,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import img4 from "../Images/home-4.png";
-import img2 from "../Images/home-2.png";
-import {Link} from "react-router-dom";
-
+// import img2 from "../Images/home-2.png";
+import axios from 'axios';
+import {Link, useParams} from "react-router-dom";
+import noImageFound from "../Images/noImageFound.PNG"
 
 const customers = [
   {
@@ -38,7 +39,29 @@ const customers = [
 ]
 
 function ProductDescription() {
+  const { id } = useParams();
+  console.log(`${id}`);
   const[quantity, setQuantity] = useState(1);
+  const[productDetails, setProductDetails] = useState([]);
+  const[products, setProducts] = useState([]);
+
+  useEffect(() => {
+    if(id){
+      axios.get(`http://44.196.64.110:9876/product/get-product-details/${id}`).then((resp) => {
+        if(resp.data.success){
+          setProductDetails(resp.data.product);
+        }
+      })
+    }
+  }, [id])
+  
+  useEffect(() => {
+    fetch("http://44.196.64.110:9876/product/get-latest-product").then(res => res.json()).then(data =>{
+      if(data.success){
+        setProducts(data.product);
+      }
+    })
+  }, [])
 
   const handleQuantityChange = (type) => {
     setQuantity(prev => (type === 'increment' ? prev + 1 : prev > 1 ? prev - 1: 1));
@@ -87,23 +110,23 @@ function ProductDescription() {
     ]
   };
 
-  const products = [
-    {
-      img: img2,  
-      title: "TNT PIPE DREAM LOCK ON",
-      price: "280.00",
-    },
-    {
-      img: img2,
-      title: "TNT PIPE DREAM LOCK ON",
-      price: "280.00",
-    },
-    {
-      img: img2,
-      title: "TNT PIPE DREAM LOCK ON",
-      price: "280.00",
-    },
-  ];
+  // const products = [
+  //   {
+  //     img: img2,  
+  //     title: "TNT PIPE DREAM LOCK ON",
+  //     price: "280.00",
+  //   },
+  //   {
+  //     img: img2,
+  //     title: "TNT PIPE DREAM LOCK ON",
+  //     price: "280.00",
+  //   },
+  //   {
+  //     img: img2,
+  //     title: "TNT PIPE DREAM LOCK ON",
+  //     price: "280.00",
+  //   },
+  // ];
 
   return (
     <Box>
@@ -115,15 +138,16 @@ function ProductDescription() {
         </Container>
       </Box>
 
+      {/* Product-Description */}
       <Box sx={{ backgroundColor: "#000", color: "#fff", paddingY: 4 }}>  
         <Container maxWidth={false} className="container">
           <Box sx={{display: {xs: 'column', md:'flex'}, justifyContent: 'space-between'}}>
-            <Box component="img" src={prodDescription.img} alt={prodDescription.title} sx={{ height: "600px", width: "100%", objectFit: "contain", borderRadius: "10px" }}/>
+            <Box component="img" src={productDetails.img || noImageFound} alt={productDetails.productName} sx={{ height: {xs: "300px",md:"500px"}, width: "100%", objectFit: "contain", borderRadius: "10px" }}/>
 
             <Box sx={{mr: 4}}>
-              <Typography variant="h3" sx={{ fontWeight: 'bold', mt: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'}}}>{prodDescription.title}</Typography>
+              <Typography variant="h3" sx={{ fontWeight: 'bold', mt: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'}}}>{productDetails.productName}</Typography>
               <Box sx={{display: {xs: 'column',md:'flex'}, justifyContent: 'space-between'}}>
-                <Typography variant="h3" sx={{ color: "#4CAF50", my: 4, fontWeight: 'bold', mb: {xs: 2, md: 4}, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'} }}>{prodDescription.price}</Typography>
+                <Typography variant="h3" sx={{ color: "#4CAF50", my: 4, fontWeight: 'bold', mb: {xs: 2, md: 4}, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'} }}>${productDetails.price}</Typography>
 
                 <Box sx={{display: 'flex', mt: 2 }}>
                   <Typography variant='h6' sx={{mr:2, mt: 4, fontFamily: '"Poppins", sans-serif' }}>Quantity</Typography>
@@ -142,7 +166,7 @@ function ProductDescription() {
 
               <Box sx={{display: {xs:'column',md:'flex'}, gap: '2', mt: 3}}>
                 <Link to="/checkout"><Button variant='contained' color='success' sx={{ flex: 1, mr: 2, textTransform: 'initial', fontSize: '1.3rem', fontWeight: 'bold', px: 16}}>Buy</Button></Link>
-                <Link to="/cart"><Button variant='outlined' color='success' sx={{ flex: 1, ml: {xs: 0, md:2}, textTransform: 'initial', fontSize: '1.3rem', fontWeight: 'bold', px: 10.5, mt: {xs: 2, md: 0} }}>Add to Cart</Button></Link>
+                <Link to="/cart"><Button variant='outlined' color='success' sx={{ flex: 1, ml: {xs: 0, md:2}, textTransform: 'initial', fontSize: '1.3rem', fontWeight: 'bold', px: 10.5, mt: {xs: 2, md: 0}, whiteSpace: 'nowrap' }}>Add to Cart</Button></Link>
               </Box>
             </Box>
           </Box>
@@ -151,7 +175,7 @@ function ProductDescription() {
             <Typography variant="h3" sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', mb: 2, fontSize: {xs: '2.5rem'}   }}>
               <GpsFixedIcon sx={{ fontSize: {xs: '2.2rem', md: '2.5rem'}, mr: 1, fontFamily: '"Poppins", sans-serif', }} /> Description
             </Typography>
-            <Typography variant="body1" sx={{ color: "#fff", mb: 3, fontFamily: '"Poppins", sans-serif'  }}>{prodDescription.description}</Typography>
+            <Typography variant="body1" sx={{ color: "#fff", mb: 3, fontFamily: '"Poppins", sans-serif'  }}>{productDetails.productDescription}</Typography>
 
             <Typography variant='h6' sx={{fontWeight: 'bold', mb: 2, fontFamily: '"Poppins", sans-serif' }}>Specifications:</Typography>
             <Box component="ul" sx={{color: '#fff', mb: 3, ml: 3}}>
@@ -196,6 +220,7 @@ function ProductDescription() {
         </Container>
       </Box>
 
+      {/* Latest-Products */}
       <Box className="products-sec section" sx={{backgroundColor: "#000"}}>
         <Container maxWidth={false} className='container'>
           <Box>
@@ -204,28 +229,29 @@ function ProductDescription() {
             </Typography>
 
             <Slider {...settings}>
-                {products.map((product, index) => (
+              {products.map((product, index) => (
                 <Box key={index} sx={{ padding: "10px", textAlign: "center" }}>
-                    <Box component="img" src={product.img} alt={product.title} sx={{ height: "300px", width: "100%", objectFit: "cover", borderRadius: "10px", marginBottom: "10px",}}/>
+                  <Link to={`/productdescription/${product._id}`} className="link-c">
+                    <Box component="img" src={product.img || noImageFound} alt={product.productName} sx={{ height: "300px", width: "100%", objectFit: "cover", borderRadius: "10px", marginBottom: "10px",}}/>
                     <Box display="flex" justifyContent="center" sx={{ color: "#FFDD44", mb: 1 }}>
                         {[...Array(5)].map((_, i) => (
                             i < 4 ? <StarIcon key={i} /> : <StarBorderIcon key={i} />
                         ))}
                     </Box>
                     <Typography variant="h6" sx={{ color: "white", fontWeight: "bold", fontFamily: '"Poppins", sans-serif'  }}>
-                        {product.title}
+                        {product.productName}
                     </Typography>
                     <Typography variant="body1" sx={{ color: "white", fontFamily: '"Poppins", sans-serif'  }}>
                         Regular price ${product.price}
                     </Typography>
+                  </Link>
                 </Box>
-                ))}
+              ))}
             </Slider>
             
           </Box>
         </Container>
-     </Box>
-
+      </Box>
     </Box>
   )
 }

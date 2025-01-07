@@ -45,7 +45,7 @@ function AboutUs() {
       <Box sx={{color: '#fff'}}> 
         <Container maxWidth={false} className="container center-content">
           <Box sx={{display:  'flex', gap: '50px', flexWrap: 'wrap'}}>
-            <Typography variant='h4' sx={{fontWeight: 'bold'}}>Mission</Typography><GpsFixedOutlinedIcon sx={{fontSize: '2.5rem'}}/>
+            <Typography variant='h4' sx={{fontWeight: 'bold', fontFamily: '"Poppins", sans-serif',}}>Mission</Typography><GpsFixedOutlinedIcon sx={{fontSize: '2.5rem'}}/>
             <Typography variant='h4' sx={{fontWeight: 'bold'}}>Vision</Typography><GpsFixedOutlinedIcon sx={{fontSize: '2.5rem'}}/>
             <Typography variant='h4' sx={{fontWeight: 'bold'}}>Values</Typography>
           </Box>
@@ -63,8 +63,8 @@ function AboutUs() {
       <Box sx={{ backgroundColor: '#000', color: '#fff' }}>
         <Container maxWidth={false} className="container center-content" sx={{ flexDirection: 'column' }}>
           <Box sx={{ display: 'block', textAlign: 'center' }}>
-            <Typography variant='h4' sx={{ mb: 2, fontWeight: 'bold' }}>Meet the Team</Typography>
-            <Typography variant='h6' color='#797979'>Meet our team of professionals to serve you </Typography>
+            <Typography variant='h4' sx={{ mb: 2, fontWeight: 'bold',fontFamily: '"Poppins", sans-serif', }}>Meet the Team</Typography>
+            <Typography variant='h6' color='#797979' fontFamily= '"Poppins", sans-serif'>Meet our team of professionals to serve you </Typography>
           </Box>
           <Box className='center-content' sx={{ my: 5, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 4 }}>
             {
@@ -72,8 +72,8 @@ function AboutUs() {
                 <Box key={idx} sx={{ backgroundColor: '#fff', width: "280px", borderRadius: '8px', overflow: 'hidden', boxShadow: 3 }}>
                   <Box component="img" src={team.img} alt={team.name} sx={{ height: "250px", width: "280px", objectFit: "cover" }} />
                   <Box className='center-content' sx={{ flexDirection: 'column', p: 2, color: '#000' }}>
-                    <Typography variant='body1' sx={{ fontWeight: 'bold', color: '#747474' }}>{team.title}</Typography>
-                    <Typography variant='h6' sx={{fontWeight: 'bold'}}>{team.name}</Typography>
+                    <Typography variant='body1' sx={{ fontWeight: 'bold', color: '#747474', fontFamily: '"Poppins", sans-serif', }}>{team.title}</Typography>
+                    <Typography variant='h6' sx={{fontWeight: 'bold',fontFamily: '"Poppins", sans-serif'}}>{team.name}</Typography>
                   </Box>
                 </Box>
               ))

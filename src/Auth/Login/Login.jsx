@@ -84,6 +84,7 @@ function Login() {
       toast.error("Please Enter Username and Password");
       return;
     }
+    sessionStorage.setItem('Email', formData.email);
     setLoading(true);
 
     try{

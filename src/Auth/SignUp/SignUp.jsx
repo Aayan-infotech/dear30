@@ -18,18 +18,20 @@ function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const [value, setEmail] = useState('');
   const [value1, setEmail1] = useState('');
   const [value2, setEmail2] = useState('');
   const user = sessionStorage.getItem("User");
-  console.log(user);
+  // console.log(user);
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider1).then((data) => {
@@ -69,12 +71,13 @@ function SignUp() {
   const validate = () => {
     const newErrors = {};
 
-    if(!formData.fullName && !formData.email && !formData.password){
+    if(!formData.firstName && !formData.lastName && !formData.email && !formData.password){
       toast.error("Please Enter the Details.");
       return;
     }
 
-    if (!formData.fullName) newErrors.fullName = "Please Enter Your Name";
+    if (!formData.firstName) newErrors.firstName = "Please Enter Your First Name";
+    if (!formData.lastName) newErrors.lastName = "Please Enter Your Last Name";
     if (!formData.email) newErrors.email = "Please Enter Your Email";
     if (!formData.password) newErrors.password = "Please Enter Your Password";
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Password Do Not Match";
@@ -89,7 +92,8 @@ function SignUp() {
       try {
         const response = await axios.post("http://44.196.64.110:9876/user/signup",
           {
-            fullName: formData.fullName,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
             email: formData.email,
             password: formData.password,
             userType: user
@@ -99,7 +103,7 @@ function SignUp() {
           position: "top-right",
           autoClose: 2000,
         });
-        setFormData({ fullName: "", email: "", password: "", confirmPassword: "" });
+        setFormData({ firstName: "",lastName: "", email: "", password: "", confirmPassword: "" });
         navigate("/login");
       } catch (error) {
         toast.error(error?.response?.data?.message || "Something went wrong!", {
@@ -133,8 +137,11 @@ function SignUp() {
       </Typography>
 
       <Box display="flex" flexDirection="column" gap={2} mb={4} width="100%" maxWidth="520px">
-        <TextField variant="outlined" label="Full Name" name="fullName" value={formData.fullName} onChange={handleChange} InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
-        {errors.fullName && <Typography variant="body6" color="error">{errors.fullName}</Typography>}
+        <TextField variant="outlined" label="First Name" name="firstName" value={formData.firstName} onChange={handleChange} InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+        {errors.firstName && <Typography variant="body6" color="error">{errors.firstName}</Typography>}
+
+        <TextField variant="outlined" label="Last Name" name="lastName" value={formData.lastName} onChange={handleChange} InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },}, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+        {errors.lastName && <Typography variant="body6" color="error">{errors.lastName}</Typography>}
 
         <TextField variant="outlined" label="Email Address" name="email" value={formData.email} onChange={handleChange} InputProps={{ style: { color: "white" } }} sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] },},"& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
         {errors.email && <Typography variant="body6" color="error">{errors.email}</Typography>}

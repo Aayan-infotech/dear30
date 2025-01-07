@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, CardContent, CardActions, Box, Container, Typography, Button, Grid, List, ListItem, ListItemIcon, ListItemText, Divider, InputBase, IconButton } from '@mui/material';
 import {CreditCard, ExitToApp,} from '@mui/icons-material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
@@ -39,6 +39,7 @@ const orders = [
 
 function MyOrders() {
 
+  const[seletedItem, setSelectedItem] = useState("null");
   const handleLogout = () => {
     sessionStorage.removeItem("Token");
   }
@@ -65,14 +66,14 @@ function MyOrders() {
               <Box sx={{ mb: 2, display: 'flex', padding: '15px 15px 10px 15px'}}>
                 <img src={img1} alt="Profile" style={{ borderRadius: '50%' }} />
                 <Box sx={{marginLeft: '20px'}}>
-                    <Typography variant="body6" color="textSecondary">Hello!</Typography>
-                    <Typography variant="h6" sx={{ color: '#000', fontWeight: 'bold', fontSize: '1.3rem' }}>Robert Fox</Typography>
+                  <Typography variant="body6" color="textSecondary">Hello!</Typography>
+                  <Typography variant="h6" sx={{ color: '#000', fontWeight: 'bold', fontSize: '1.3rem' }}>Robert Fox</Typography>
                 </Box>
               </Box>
               <Divider sx={{ borderColor: '#2e2e2e', mb: 2 }} />
               <List component="nav">
                 <Link to="/personalinfo" className='link-c'>
-                  <ListItem button selected sx={{'&:hover':{backgroundColor: '#5FEF45'}}}>
+                  <ListItem button selected={seletedItem === "PersonalInfo"} sx={{backgroundColor: seletedItem === "PersonalInfo" ? "blue" : "#fff" ,'&:hover':{backgroundColor: '#5FEF45'}}} onClick={() => setSelectedItem("PersonalInfo")}>
                     <ListItemIcon><PermIdentityOutlinedIcon sx={{ color: '#000' }} /></ListItemIcon>
                     <ListItemText primary="Personal Information" primaryTypographyProps={{ sx: { color: '#000', fontSize: '1.1rem', whiteSpace: 'nowrap' } }}/>
                   </ListItem>
@@ -85,7 +86,6 @@ function MyOrders() {
                   </ListItem>
                 </Link>
 
-                
                 <Link to="/manageaddress" className='link-c'>
                   <ListItem button sx={{my: 1, '&:hover':{backgroundColor: '#5FEF45'}}}>
                     <ListItemIcon><RoomOutlinedIcon sx={{ color: '#000' }} /></ListItemIcon>
@@ -133,7 +133,7 @@ function MyOrders() {
                   </Box>
                 </Box>
                 <Box sx={{display: 'flex', color: '#fff', marginTop: {xs: '10px', md: '0px'}}}>
-                  <Typography variant='body2' sx={{height: '30px', width: '80px', color: order.status === 'Delivered' ? '#3CD139' : '#E3B231', backgroundColor: order.status === 'Delivered' ? '#3CD1391A' : '#E3B2311A', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: "2px"}}>
+                  <Typography variant='body2' sx={{height: '30px', width: '80px', color: order.status === 'Delivered' ? '#3CD139' : '#E3B231', backgroundColor: order.status === 'Delivered' ? '#3CD1391A' : '#E3B2311A', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: "2px"}} fontFamily='"Poppins", sans-serif'>
                     {order.status === 'Delivered' ? 'Delivered' : 'In Process'}
                   </Typography>
                   <Typography variant="body3" sx={{marginLeft: '22px'}}>
@@ -144,7 +144,7 @@ function MyOrders() {
               </CardContent>
 
               <CardContent>
-                <Typography variant="h6" sx={{color: '#fff', fontWeight: 'bold'}}>${order.price.toFixed(2)}</Typography>
+                <Typography variant="h6" sx={{color: '#fff', fontWeight: 'bold'}} fontFamily='"Poppins", sans-serif'>${order.price.toFixed(2)}</Typography>
               </CardContent>
 
               <CardActions sx={{display: {xs: 'flex', md: 'flex'}, flexDirection: {xs: 'row', md: 'column'}, justifyContent: {xs: 'space-between', md: 'start'}}}>

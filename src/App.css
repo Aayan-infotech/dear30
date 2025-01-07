@@ -85,7 +85,7 @@ input:-internal-autofill-selected {
 background-color: black!important;
 }
 
-/* input,
+input,
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
@@ -93,7 +93,7 @@ input:-webkit-autofill:focus {
     -webkit-background-clip: text;
     -webkit-text-fill-color: white;
     color: white !important;
-} */
+}
 
 /* -webkit-box-shadow: 0 0 50px rgba(255, 255, 255, 0) inset !important;
 background-color: #000 !important;
