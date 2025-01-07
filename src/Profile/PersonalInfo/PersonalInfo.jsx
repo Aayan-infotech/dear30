@@ -11,6 +11,8 @@ import { green } from "@mui/material/colors";
 import img1 from "../../Images/home-4.png";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function PersonalInfo() {
   
@@ -30,11 +32,6 @@ function PersonalInfo() {
   const handleResetPassword = async () => {
     const email = sessionStorage.getItem('Email');
   
-    if (!email) {
-      alert("Email is not found in session storage!");
-      return;
-    }
-  
     const payload = {
       email,
       password,
@@ -49,18 +46,21 @@ function PersonalInfo() {
       });
   
       if (response.data.success) {
-        alert("Password updated successfully!");
+        toast.success("Password Updated Successfully!");
+        setPassword("");
+        setNewPassword("");
       } else {
-        alert(response.data.message || "Failed to update password. Please try again.");
+        toast.error("Failed to update password. Please try again.");
       }
     } catch (error) {
       console.error('Error:', error.response || error.message);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   };  
 
   return (
     <Box sx={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', py: 5 }}>
+      <ToastContainer/>
       <Container maxWidth="lg">
         {/* Profile Title */}
         <Typography variant="h3" sx={{ color: '#fff', mb: 3 }}>My Profile</Typography>
@@ -154,96 +154,48 @@ function PersonalInfo() {
               </Grid>
 
               {/* Update Button */}
-              {/* <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-                <Button variant="contained" sx={{ backgroundColor: '#5FEF45', color: '#fff', px: 10, fontSize: '1.2rem', textTransform: 'initial', fontWeight: 'bold' }}>Update</Button>
-              </Box> */}
               <Box sx={{  display: 'inline-block', justifyContent: 'center', mt: 3, p: '2px', borderRadius: 2}}>
                 <Button variant="contained" sx={{ background: 'linear-gradient(90deg, #599D21 0%, #179B7E 100%)', color: '#fff', fontWeight: 'bold', fontSize: '1.2rem', textTransform: 'none', borderRadius: 2, px: 8 }}>Update</Button>
               </Box>
 
               {/* Change Password Section */}
               <Box sx={{ mt: 4 }}>
-  <Typography variant="h4" sx={{ color: '#fff', mb: 1 }}>Change Password</Typography>
-  <Typography variant="body3" color="textSecondary" sx={{ color: '#fff', mb: 2 }}>
-    Type your new strong password. Your password must include:<br />
-    One capital letter & one small letter at least, one special character, and a minimum of 8 digits long.
-  </Typography>
+                <Typography variant="h4" sx={{ color: '#fff', mb: 1 }}>Change Password</Typography>
+                <Typography variant="body3" color="textSecondary" sx={{ color: '#fff', mb: 2 }}>
+                  Type your new strong password. Your password must include:<br />
+                  One capital letter & one small letter at least, one special character, and a minimum of 8 digits long.
+                </Typography>
 
-  <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+                <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField fullWidth variant="outlined" type={confirmPassword ? "text" : "password"} label="Current Password" value={password} onChange={(e) => setPassword(e.target.value)} InputProps={{ style: { color: "white" }, endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleTogglePasswordVisibility} edge="end" sx={{ color: "white" }}>
+                          {confirmPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),}}
+                    sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] } }, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField fullWidth variant="outlined" type={showConfirmPassword ? "text" : "password"} label="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} InputProps={{ style: { color: "white" },endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleToggleConfirmPasswordVisibility} edge="end" sx={{ color: "white" }}>
+                          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),}}
+                    sx={{ bgcolor: "black", "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] } }, "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },}}/>
+                  </Grid>
+                </Grid>
 
-    <Grid item xs={12} sm={6}>
-      <TextField
-        fullWidth
-        variant="outlined"
-        type={confirmPassword ? "text" : "password"}
-        label="Current Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        InputProps={{
-          style: { color: "white" },
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={handleTogglePasswordVisibility} edge="end" sx={{ color: "white" }}>
-                {confirmPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        sx={{
-          bgcolor: "black",
-          "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] } },
-          "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },
-        }}
-      />
-    </Grid>
-
-    <Grid item xs={12} sm={6}>
-      <TextField
-        fullWidth
-        variant="outlined"
-        type={showConfirmPassword ? "text" : "password"}
-        label="New Password"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-        InputProps={{
-          style: { color: "white" },
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={handleToggleConfirmPasswordVisibility} edge="end" sx={{ color: "white" }}>
-                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        sx={{
-          bgcolor: "black",
-          "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: green[500] }, "&:hover fieldset": { borderColor: green[500] } },
-          "& .MuiInputLabel-root": { color: "white", fontFamily: "Poppins, sans-serif" },
-        }}
-      />
-    </Grid>
-  </Grid>
-
-  {/* Reset Button */}
-  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3, p: '2px', borderRadius: 2 }}>
-    <Button
-      variant="contained"
-      onClick={handleResetPassword}
-      sx={{
-        background: 'linear-gradient(90deg, #599D21 0%, #179B7E 100%)',
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: '1.2rem',
-        textTransform: 'none',
-        borderRadius: 2,
-        px: 9,
-      }}
-    >
-      Reset
-    </Button>
-  </Box>
+                {/* Reset Button */}
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3, p: '2px', borderRadius: 2 }}>
+                  <Button variant="contained" onClick={handleResetPassword} sx={{ background: 'linear-gradient(90deg, #599D21 0%, #179B7E 100%)', color: '#fff', fontWeight: 'bold', fontSize: '1.2rem', textTransform: 'none', borderRadius: 2, px: 9,}}>
+                    Reset
+                  </Button>
+                </Box>
               </Box>
-
             </Box>
           </Grid>
         </Grid>
