@@ -14,24 +14,8 @@ import img4 from "../Images/home-4.png";
 import img5 from "../Images/home-5.png";
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import { Link } from "react-router-dom";
+import axios from "axios"
 
-// const products = [
-//     {
-//       img: img1,  
-//       title: "TNT PIPE DREAM LOCK ON",
-//       price: "280.00",
-//     },
-//     {
-//       img: img2,
-//       title: "TNT PIPE DREAM LOCK ON",
-//       price: "280.00",
-//     },
-//     {
-//       img: img3,
-//       title: "TNT PIPE DREAM LOCK ON",
-//       price: "280.00",
-//     },
-// ];
 
 const customers = [
     {
@@ -54,39 +38,34 @@ const customers = [
     }
 ]
 
-const blogs = [
-    {
-        img: img5,
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        img1: img4,
-        name: "Andy Claremont",
-        date: "22 Nov 2023"
-    },
-    {
-        img: img5,
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        img1: img4,
-        name: "Andy Claremont",
-        date: "22 Nov 2023"
-    },
-    {
-        img: img5,
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        img1: img4,
-        name: "Andy Claremont",
-        date: "22 Nov 2023"
-    }
-]
-
 function Home() {
   const[products, setProducts] = useState([]);
+  const[blogs, setBlogs] = useState([]);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://44.196.64.110:9876/product/get-latest-product");
+      if (response.data.success) {
+        console.log(response.data.product);
+        setProducts(response.data.product);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get("http://localhost:9876/blogs/getBlog");
+        console.log(response.data);
+        setBlogs(response.data.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
   useEffect(() => {
-    fetch("http://44.196.64.110:9876/product/get-latest-product").then(res => res.json()).then(data =>{
-      if(data.success){
-        setProducts(data.product);
-      }
-    })
+    fetchProducts()
+    fetchBlogs()
   }, [])
       
   const settings = {
@@ -180,7 +159,7 @@ function Home() {
               {products.map((product, index) => (
                 <Box key={index} sx={{ padding: "10px", textAlign: "center" }}>
                   <Link to={`/productdescription/${product._id}`} className="link-c">
-                    <Box component="img" src={product.img || noImageFound} alt={product.productName} sx={{ height: "300px", width: "100%", objectFit: "cover", borderRadius: "10px", marginBottom: "10px",}}/>
+                    <Box component="img" src={product.images[0] || noImageFound} alt={product.productName} sx={{ height: "300px", width: "100%", objectFit: "cover", borderRadius: "10px", marginBottom: "10px",}}/>
                     <Box display="flex" justifyContent="center" sx={{ color: "#FFDD44", mb: 1 }}>
                         {[...Array(5)].map((_, i) => (
                             i < 2 ? <StarIcon key={i} /> : <StarBorderIcon key={i} />
@@ -245,15 +224,15 @@ function Home() {
             <Slider {...settings}>
                 {blogs.map((blog, index) => (
                 <Box key={index} sx={{ padding: "10px", textAlign: "left" }}>
-                    <Box component="img" src={blog.img} alt={blog.title} sx={{ height: "200px", width: "100%", borderRadius: "10px", marginBottom: "10px",}}/>
-                    <Typography variant="h6" sx={{ color: "#F3B2D5", backgroundColor: '#381E2C', height: '40px', width: '100%', borderRadius: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px 0',  fontFamily: '"Poppins", sans-serif' }}>News</Typography>
-                    <Typography variant="h5" sx={{ color: "white", fontWeight: '600', margin: '20px 0', fontFamily: '"Poppins", sans-serif'  }}>Tagline</Typography>
+                    <Box component="img" src={blog.images[0]} alt={blog.title} sx={{ height: "200px", width: "100%", borderRadius: "10px", marginBottom: "10px",}}/>
+                    <Typography variant="h6" sx={{ color: "#F3B2D5", backgroundColor: '#381E2C', height: '40px', width: '100%', borderRadius: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px 0',  fontFamily: '"Poppins", sans-serif' }}>{blog?.category}</Typography>
+                    {/* <Typography variant="h5" sx={{ color: "white", fontWeight: '600', margin: '20px 0', fontFamily: '"Poppins", sans-serif'  }}>Tagline</Typography> */}
                     <Typography variant="h6" sx={{ color: "white", fontWeight: "400",  fontFamily: '"Poppins", sans-serif'  }}>
                         {blog.description}
                     </Typography>
-                    <Typography variant="body1" sx={{ color: "white", display: "flex", alignItems: "center", mt: 2, fontFamily: '"Poppins", sans-serif'  }}>
+                    <Typography variant="body1" sx={{ color: "white", display: "flex", alignItems: "center",justifyContent:"space-between", mt: 2, fontFamily: '"Poppins", sans-serif'  }}>
                         <Box component="img" src={blog.img1} alt={blog.title} sx={{ height: "30px", width: "30px", objectFit: "cover", borderRadius: "10px", marginRight: "10px"}}/>
-                        {blog.name} <span style={{color: '#96969E', marginLeft: '10px'}}>{blog.date}</span>
+                        {blog?.author} <span style={{color: '#96969E', marginLeft: '10px'}}>{new Date(blog.date).toISOString().split("T")[0]}</span>
                     </Typography>
                 </Box>
                 ))}

@@ -40,7 +40,6 @@ const customers = [
 
 function ProductDescription() {
   const { id } = useParams();
-  console.log(`${id}`);
   const[quantity, setQuantity] = useState(1);
   const[productDetails, setProductDetails] = useState([]);
   const[products, setProducts] = useState([]);
@@ -49,6 +48,7 @@ function ProductDescription() {
     if(id){
       axios.get(`http://44.196.64.110:9876/product/get-product-details/${id}`).then((resp) => {
         if(resp.data.success){
+          console.log(resp.data.product)
           setProductDetails(resp.data.product);
         }
       })
@@ -110,23 +110,6 @@ function ProductDescription() {
     ]
   };
 
-  // const products = [
-  //   {
-  //     img: img2,  
-  //     title: "TNT PIPE DREAM LOCK ON",
-  //     price: "280.00",
-  //   },
-  //   {
-  //     img: img2,
-  //     title: "TNT PIPE DREAM LOCK ON",
-  //     price: "280.00",
-  //   },
-  //   {
-  //     img: img2,
-  //     title: "TNT PIPE DREAM LOCK ON",
-  //     price: "280.00",
-  //   },
-  // ];
 
   return (
     <Box>
@@ -142,7 +125,7 @@ function ProductDescription() {
       <Box sx={{ backgroundColor: "#000", color: "#fff", paddingY: 4 }}>  
         <Container maxWidth={false} className="container">
           <Box sx={{display: {xs: 'column', md:'flex'}, justifyContent: 'space-between'}}>
-            <Box component="img" src={productDetails.img || noImageFound} alt={productDetails.productName} sx={{ height: {xs: "300px",md:"500px"}, width: "100%", objectFit: "contain", borderRadius: "10px" }}/>
+            <Box component="img" src={productDetails?.images?.[0] || noImageFound} alt={productDetails.productName} sx={{ height: {xs: "300px",md:"500px"}, width: "50%", objectFit: "contain", borderRadius: "10px" }}/>
 
             <Box sx={{mr: 4}}>
               <Typography variant="h3" sx={{ fontWeight: 'bold', mt: 4, fontFamily: '"Poppins", sans-serif', fontSize: {xs: '2.5rem'}}}>{productDetails.productName}</Typography>
